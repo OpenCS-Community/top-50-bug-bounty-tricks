@@ -1,96 +1,206 @@
-TOP 50 Bug Bounty Hunting Tricks
+<div align="center">
 
-A practical guide to web application security testing, vulnerability discovery, and responsible disclosure.
+# 🎯 Top 50 Bug Bounty Hunting Tricks
 
-Learn how to approach bug bounty programs systematically, identify security weaknesses, validate findings safely, and write high-quality vulnerability reports.
+**A curated, practical collection of high-impact techniques from real hunters.**
 
-Table of Contents
+By **Computer Science Projects** — your hub for ethical hacking, OSINT, bug
+bounty, programming, and networking.
 
-1. "Introduction" (#introduction)
-2. "Rules of Engagement" (#rules-of-engagement)
-3. "The Top 50 Techniques" (#the-top-50-techniques)
-4. "Essential Tools" (#essential-tools)
-5. "Bug Bounty Workflow" (#bug-bounty-workflow)
-6. "Reporting Template" (#reporting-template)
-7. "Learning Roadmap" (#learning-roadmap)
-8. "Contributing" (#contributing)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Channel](https://img.shields.io/badge/WhatsApp-Channel-25D366?logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029Vb6d5MtAInPhysn10r06)
+[![Telegram](https://img.shields.io/badge/Telegram-Channel-26A5E4?logo=telegram&logoColor=white)](https://t.me/computerscienceprojects)
+[![Group](https://img.shields.io/badge/Telegram-Group-26A5E4?logo=telegram&logoColor=white)](https://t.me/hk3knsu)
 
-Introduction
+</div>
 
-Bug bounty hunting is the practice of finding and responsibly reporting security vulnerabilities in systems whose owners have authorized testing. Organizations may reward valid reports according to their published program policies.
+---
 
-This repository provides 50 techniques covering reconnaissance, web application security, authentication, APIs, configuration errors, business logic, and report writing.
+## 👋 Welcome to Computer Science Projects
 
-Who is this for?
+We're a community for learners and practitioners of:
 
-- Beginners learning ethical hacking.
-- Developers improving application security.
-- Students studying cybersecurity.
-- Bug bounty hunters improving their methodology.
+- 🔐 **Ethical Hacking**
+- 🕵️ **OSINT**
+- 🎯 **Bug Bounty Hunting**
+- 💻 **Programming**
+- 🌐 **Networking**
 
-Rules of Engagement
+This repository is one of our **flagship resources** — a curated collection of
+50 battle-tested bug bounty tricks, written to be **actionable, not
+theoretical**.
 
-Before testing any target:
+> ⚠️ **Disclaimer:** For educational purposes only. Only test on programs you
+> are authorized to test. Always follow scope and disclosure rules. Never
+> publish live unpatched bugs or victim data.
 
-- Read the program's scope and rules.
-- Test only explicitly authorized assets.
-- Respect rate limits and prohibited testing methods.
-- Use test accounts and synthetic data where possible.
-- Never access, modify, or disclose another person's private information.
-- Do not disrupt services, perform destructive tests, or run uncontrolled scans.
-- Stop when a test risks affecting real users.
-- Report findings privately through the approved channel.
+---
 
-Use intentionally vulnerable training applications when practicing techniques outside an authorized program.
+## 📢 Join the Community
 
-The Top 50 Techniques
+Stay updated with new tricks, write-ups, and projects:
 
-Section 1: Reconnaissance and Asset Discovery
+| Platform            | Link                                                                 |
+|---------------------|----------------------------------------------------------------------|
+| 💬 **WhatsApp Channel** | [Join here](https://whatsapp.com/channel/0029Vb6d5MtAInPhysn10r06) |
+| 💬 **WhatsApp Group**   | [Join here](https://chat.whatsapp.com/LWNI2iE9CgQKJzC5Bo1mUm)      |
+| 📨 **Telegram Channel** | [@computerscienceprojects](https://t.me/computerscienceprojects)   |
+| 👥 **Telegram Group**   | [Join here](https://t.me/hk3knsu)                                  |
 
-01. Read the Program Scope
+> **Rule reminder:** Share only CS-related content. No spam. No off-topic
+> chats. **If you're serious about studying, stay.** 🎓
 
-Identify in-scope domains, applications, APIs, excluded assets, allowed testing methods, and reporting requirements before beginning.
+---
 
-02. Map the Application
+## 🗂️ The Top 50
 
-List public pages, authenticated areas, forms, API endpoints, account settings, and major workflows. Build an application map.
+### 🔍 Recon & Attack Surface — [#1–#6](docs/01-recon.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 1 | Find origin IPs via historical DNS + CT logs to bypass WAF | High |
+| 2 | Enumerate publicly published internal browser extensions | High |
+| 3 | Check open registration on Jira/Jenkins/ServiceNow | Critical |
+| 4 | Mine job postings for tech stack fingerprinting | Medium |
+| 5 | Google dork for misconfigured cloud storage (S3/GCP/Azure) | Critical |
+| 6 | Enumerate subdomains via SPF/DMARC misconfigurations | Medium |
 
-03. Enumerate Subdomains
+### 🌐 SSRF & Cloud — [#7–#13](docs/02-ssrf-cloud.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 7 | DNS rebinding to bypass SSRF allowlists | Critical |
+| 8 | Steal backend `Authorization` headers via unvalidated webhooks | Critical |
+| 9 | IMDSv2 bypass using an external redirector | Critical |
+| 10 | Bypass SSRF filters with IPv6, decimal, and octal IPs | High |
+| 11 | Exploit PDF/thumbnail generators for blind SSRF | High |
+| 12 | Access cloud metadata via `file://`, `gopher://`, `dict://` | Critical |
+| 13 | Force SSRF through XML parsers (XXE → SSRF) | Critical |
 
-Use authorized passive sources and approved enumeration tools to discover in-scope subdomains. Verify ownership and scope before active testing.
+### ⚡ Race Conditions — [#14–#17](docs/03-race-conditions.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 14 | Single-packet attack for reliable race conditions | Critical |
+| 15 | Coupon reuse via parallel redemption | High |
+| 16 | Multiple withdrawals via TOCTOU on balance checks | Critical |
+| 17 | Bypass rate limits with HTTP/2 multiplexing | High |
 
-04. Discover Additional Assets
+### 🖥️ Client-Side Attacks — [#18–#23](docs/04-client-side.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 18 | Client-Side Path Traversal (CSPT) as a gadget | High |
+| 19 | Chain open redirect + CSPT for account takeover | Critical |
+| 20 | Silent CSTI payloads via `constructor` (no `alert`) | High |
+| 21 | DOM clobbering to hijack script behavior | High |
+| 22 | PostMessage origin bypass via `null` origin | High |
+| 23 | Prototype pollution → XSS chain | Critical |
 
-Review official documentation, public DNS records, and program-provided asset inventories for overlooked in-scope services.
+### 🔐 Auth & Session — [#24–#29](docs/05-auth-session.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 24 | OAuth `redirect_uri` bypass via path traversal | Critical |
+| 25 | JWT `alg:none` + key confusion attacks | Critical |
+| 26 | Session fixation via pre-auth cookies | High |
+| 27 | Password reset token leakage via Referer | Critical |
+| 28 | Bypass MFA with response manipulation | Critical |
+| 29 | Account takeover via email verification race | High |
 
-05. Inspect Public JavaScript
+### 💼 Business Logic — [#30–#34](docs/06-business-logic.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 30 | Price manipulation via demand-based logic | Critical |
+| 31 | Negative quantity / amount injection in carts | Critical |
+| 32 | Bypass purchase limits via parameter tampering | High |
+| 33 | Free trial abuse via email alias tricks | Medium |
+| 34 | Currency confusion in multi-currency checkouts | High |
 
-Review publicly delivered JavaScript for API routes, feature flags, client-side validation, and references to other application components. Never expose or use discovered secrets.
+### 🗄️ Cache & Infrastructure — [#35–#39](docs/07-cache-infra.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 35 | Web cache deception via path confusion | High |
+| 36 | Cache poisoning via unkeyed headers | Critical |
+| 37 | CPDoS (Cache Poisoned Denial of Service) | High |
+| 38 | HTTP request smuggling via CL.TE / TE.CL | Critical |
+| 39 | Host header injection for password reset poisoning | Critical |
 
-06. Review Historical URLs
+### 🔌 API & Modern Stacks — [#40–#45](docs/08-api-modern.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 40 | GraphQL introspection + batching attacks | High |
+| 41 | GraphQL field duplication for rate-limit bypass | High |
+| 42 | Mass assignment via hidden API fields | Critical |
+| 43 | BOLA/IDOR in REST APIs via UUID enumeration | Critical |
+| 44 | WebSocket origin bypass + CSWSH | High |
+| 45 | gRPC reflection for API discovery | Medium |
 
-Use public URL archives to identify older routes that may still exist. Confirm each route is live and authorized before testing it.
+### 📱 Mobile — [#46–#47](docs/09-mobile.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 46 | Bypass SSL pinning with Frida scripts | High |
+| 47 | Deep link hijacking for auth token theft | Critical |
 
-07. Build an Endpoint Inventory
+### 📝 Reporting & Mindset — [#48–#50](docs/10-reporting-mindset.md)
+| # | Trick | Impact |
+|---|-------|--------|
+| 48 | Think in chains, not single bugs | — |
+| 49 | Chase depth, not volume | — |
+| 50 | Write reports that triagers love | — |
 
-Record HTTP methods, paths, parameters, authentication requirements, response types, and relevant application features.
+---
 
-08. Identify Technologies
+## 📚 Cheatsheets
 
-Use response headers, HTML, public documentation, and technology fingerprinting to understand the application's framework and components. Treat fingerprints as hypotheses, not proof of a vulnerability.
+- [Payloads Cheatsheet](cheatsheets/payloads.md) — SSRF, XSS, SSTI, JWT, XXE, SQLi, and more
+- [Google Dorks](cheatsheets/dorks.md)
+- [Tools](cheatsheets/tools.md)
 
-09. Review Public Documentation
+---
 
-Inspect API specifications, help pages, developer guides, and publicly available integration documentation for documented functionality and potential security boundaries.
+## 📁 Repository Structure
 
-10. Prioritize Interesting Features
+```
+bug-bounty-tricks/
+├── README.md
+├── LICENSE
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── CHANGELOG.md
+├── /docs              # 10 deep-dive category files
+├── /cheatsheets       # Payloads, dorks, tools
+└── /assets            # Images and diagrams
+```
 
-Focus on security-sensitive workflows such as account recovery, file uploads, payments, invitations, permissions, and administrative functions.
+---
 
-Section 2: HTTP and Input Handling
+## 🤝 Contributing
 
-11. Understand HTTP Requests
+We welcome contributions from the community! See
+[CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-Learn the purpose of methods, headers, cookies, query parameters, request bodies, and status codes. Compare normal and expected application behavior.
+- New tricks
+- Improved payloads
+- Better explanations
+- New cheatsheets
+- Translations
 
-12. Inspect Cookies
+---
+
+## 📜 License
+
+MIT — see [LICENSE](LICENSE).
+
+Copyright © 2026 **Computer Science Projects**
+
+---
+
+<div align="center">
+
+### 🎓 Keep Learning. Keep Hacking. Stay Ethical.
+
+**Made with ❤️ by Computer Science Projects**
+
+[WhatsApp Channel](https://whatsapp.com/channel/0029Vb6d5MtAInPhysn10r06) •
+[WhatsApp Group](https://chat.whatsapp.com/LWNI2iE9CgQKJzC5Bo1mUm) •
+[Telegram Channel](https://t.me/computerscienceprojects) •
+[Telegram Group](https://t.me/hk3knsu)
+
+</div>
